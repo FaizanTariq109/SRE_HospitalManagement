@@ -1,32 +1,61 @@
 # Hospital Management System
 
+---
+
+## 🛠️ Software Re-Engineering (SRE) Final Project Execution Guide
+
+This repository contains the refactored code, database migrations, and analysis for the SRE Final Project. Below are the commands required to verify the tool setup and execute the data migration pipeline during the viva.
+
+### 1. Start SonarQube
+
+Ensure Docker is running, then start the SonarQube container:
+
+```bash
+docker run -d --name sonarqube -p 9000:9000 sonarqube:lts-community
+# Note: If the container is already created, simply use: docker start sonarqube
+
+sonar-scanner
+
+# Log into MySQL
+mysql -u root -p
+
+# Inside the MySQL prompt, run the scripts (replace paths with your local paths)
+source path/to/schema_normalisation.sql;
+source path/to/refactoring_scripts.sql;
+
+# Install the required MySQL connector if not already present
+pip install mysql-connector-python
+
+# Run the migration script
+python migration_etl.py
+
 ### _YouTube Video Link: [https://youtu.be/SwE4mxQxhEI](https://youtu.be/SwE4mxQxhEI)_
 
 ## Description-
-   In this Project we aim to solve the traditional issues of hospital management. The existing system provided paper based solution for keeping OPD records of patients and hospital staff, but it gives overload to Doctor, Receptionist and Administrator.  The main issues were inappropriate data keeping, time wastage in storage, retrieval also patients were unable to understand the prescription etc. These issues are solved by providing a separate user account for doctors and other staff. Keeping each patient’s data separate and track previous visits in a single click. 
-   
-   This project uses MYSQL as backend and is developed in Java so it provides features such as platform independence, high performance and security. It is a web application which mainly uses SpringMVC and Hibernate frameworks. 
-   
+   In this Project we aim to solve the traditional issues of hospital management. The existing system provided paper based solution for keeping OPD records of patients and hospital staff, but it gives overload to Doctor, Receptionist and Administrator.  The main issues were inappropriate data keeping, time wastage in storage, retrieval also patients were unable to understand the prescription etc. These issues are solved by providing a separate user account for doctors and other staff. Keeping each patient’s data separate and track previous visits in a single click.
+
+   This project uses MYSQL as backend and is developed in Java so it provides features such as platform independence, high performance and security. It is a web application which mainly uses SpringMVC and Hibernate frameworks.
+
    It provides some enhanced features such as: an easy interface to add, remove employees as well as it provides PDF of prescription. Thus, reducing need to manually write  and  sign  by doctor.  <br>
   #### PPT Presentation: [click here](https://drive.google.com/file/d/1L6zUvNPXV4mYNnl2zLYyxvyz2RwoUt1G/view?usp=sharing)  <br>
   #### Project SRS: [click here](https://drive.google.com/file/d/11DQDP_ZN2h7Cq3hiIRw3pCzPhR_VCL8p/view?usp=sharing)  <br>
   #### Project Report: [click here](https://drive.google.com/file/d/128Qn3pqBFj84w6OXBSwuWXYpag_Wn0dT/view?usp=sharing)
-  
+
 ## Steps to configure this HMS web-application on your system:
 
-1. To import this project to your system, you need to first install below softwares: 
+1. To import this project to your system, you need to first install below softwares:
    - Eclipse for Java EE Developers and Tomcat server. You can refer this video: https://youtu.be/9iHKCnxUWqQ
    - MySQL Workbench. You can refer this video: https://youtu.be/OM4aZJW_Ojs
 
 2. Then get the code from this GitHub repository on your system. You can clone this repository or download as zip file.
 
-3. Choose 'import existing maven project' option in eclipse. 
-<br> You can search for those steps online, just search 'how to import existing maven project in eclipse'. 
+3. Choose 'import existing maven project' option in eclipse.
+<br> You can search for those steps online, just search 'how to import existing maven project in eclipse'.
 
 4. Then import the database files in your MySQL database. Database files are provided [here](https://github.com/rid17pawar/HospitalManagement/tree/master/databaseFiles%20and%20demoLoginCredentials/hospitaldb).
 <br> You can refer this video: https://youtu.be/9icY7xwXbJo
 
-5. You can then run this web-application on your Tomcat server. For login use the credentials provided in [this](https://github.com/rid17pawar/HospitalManagement/blob/master/databaseFiles%20and%20demoLoginCredentials/loginPasswordsForDemo.txt) file. (Select correct role and fill the Username and Password) 
+5. You can then run this web-application on your Tomcat server. For login use the credentials provided in [this](https://github.com/rid17pawar/HospitalManagement/blob/master/databaseFiles%20and%20demoLoginCredentials/loginPasswordsForDemo.txt) file. (Select correct role and fill the Username and Password)
 <br> If you want to add more users just login as admin and choose 'add employee' option and fill all the details. It will create new employee with his own login credentials. The Aadhar no. will be the default password and Empid will be the username.
 
 ## Technologies Used-
@@ -38,20 +67,20 @@
   - CSS
   - Bootstrap
   - JavaScript
-  
+
 ### 2. Back end Technologies:
-  - SpringMVC 
+  - SpringMVC
   - Hibernate
-  
+
 ### 3. Database:
   - MySQL
-  
+
 ### 4. Project management tool:
   - Maven
-  
+
 ### 5. Webserver:
   - Apache Tomcat
-  
+
 
 ## Issues that proposed system overcomes-
    - It is digital system rather than paper based.
@@ -68,22 +97,22 @@
       - Each patients previous visits history is easily to access.
       - Doctor can generate prescription and it will be automatically sent to receptionist.
       - Doctor can remove patient from OPD queue.
-      
+
   2. Receptionist module:
       - Register/add new patient's info.
       - Modify patients personal details
       - Search existing patient by name/ mobile no./ PID/ aadhar no.
       - Remove patient from OPD queue.
       - Take print of prescriptions.
-      
+
   3. Administrator module:
       - Add new employee for following roles,
                       i) Doctor
                      ii) Receptionist
                     iii) Admin (another one)
-      - Remove/edit existing employee. 
+      - Remove/edit existing employee.
       - Displays currently active employees in system.
-      
+
   4. Password Encryption:
       - *_Bcrypt Encoding_* is used for password encryption. Bcrypt is a password hashing function designed by Niels Provos and David Mazières. It is based on the Blowfish cipher. Bcrypt uses adaptive hash algorithm to store password. BCrypt internally generates a random salt while encoding passwords and hence it is obvious to get different encoded results for the same string. But one common thing is that everytime it generates a String of length 60.
 
@@ -139,3 +168,4 @@
 ![State Diagram](https://github.com/rid17pawar/HospitalManagement/assets/47048717/c60747f3-ba73-4611-bc46-ce6413799cf4)
 
 ### Thank You !
+```
